@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+	id="WebApp_ID" 
+	version="4.0">
+	<display-name>hello-web</display-name>
+	<servlet>
+		<servlet-name>abcServlet</servlet-name>
+		<servlet-class>com.sh.web.servlet.abcServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>xyzServlet</servlet-name>
+		<servlet-class>com.sh.web.servlet.xyzServlet</servlet-class>
+	</servlet>
+	
+	
+	<!-- 어노테이션이 했던 일을 맡았던 코드 -->
+	<servlet-mapping>
+		<servlet-name>abcServlet</servlet-name>
+		<url-pattern>/abc.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>xyzServlet</servlet-name>
+		<url-pattern>/xyz.do</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
