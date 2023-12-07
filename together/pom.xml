@@ -2,36 +2,36 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sh</groupId>
-  <artifactId>menu</artifactId>
+  <artifactId>together</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>menu Maven Webapp</name>
+  <name>together Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
-  <!-- 자바 버전 17 -->
+  <!-- 1207 추가 -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
+
+
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
+
+    <!-- 1207 추가 -->
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-core</artifactId>
       <version>9.0.83</version>
     </dependency>
 
-
-    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+    <!-- 1207 추가 -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
-
-
 
     <dependency>
       <groupId>junit</groupId>
@@ -39,8 +39,12 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
+
+
+
   <build>
-    <finalName>menu</finalName>
+    <finalName>together</finalName>
   </build>
 </project>
