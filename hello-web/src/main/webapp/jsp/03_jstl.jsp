@@ -64,6 +64,8 @@
         </thead>
         <tbody>
                 <%--
+                    varStatus : 반복상태를 관리하는 객체 이름 지정
+                    (이미 존재하는 것이고, 이름만 내가 정해주는거)
                     vs.index : 0-based index
                     vs.count : 1-based index
                     vs.first : 첫번째 요소 여부 (첫번째면 true,아님 false)
@@ -98,7 +100,10 @@
             <fmt:formatNumber value="${no1}" pattern="#,###"/>
         </li>
         <li>
+
             <%-- 특정 자리수 까지 반올림처리..   --%>
+<%--            # 해당자리수가 없으면 공란처리,
+                0 해당자리수가 없으면 0처리--%>
             <fmt:formatNumber value="${no2}" pattern="#,#"/>
         </li>
         <li>

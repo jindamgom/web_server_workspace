@@ -46,6 +46,10 @@
 		<li>
 			<a href="${pageContext.request.contextPath}/jstl.do?name=아이패드&option=red&option=128"/>jstl
 		</li>
+
+		<li>
+			<a href="${pageContext.request.contextPath}/jspTest.do"/>1207 실습문제
+		</li>
 	</ul>
 
 </body>

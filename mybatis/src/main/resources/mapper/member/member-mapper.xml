@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+    <select id="findById" resultType="com.sh.mybatis.member.model.entity.Member">
+<!--   멀티 라인 가능
+       #{id} 전달된 id값으로 치환 java jdbc에선 ?로 사용했었음.
+       id="findById" 에서 id는 태그 식별자
+       resultType ResultSet이 한행이 변환될 타입 (fullname or alias)
+       위에 패키지명까지 합쳐서 풀로 적는게 fullname
+-->
+        select
+            *
+        from
+            member
+        where
+            id = #{id}
+    </select>
+</mapper>

@@ -1,20 +1,21 @@
 <%--
 
     el 내장객체
-    -context 객체 속성 (생략 가능, 생략시 page-request,session,application순으로 조회해서 찾음)
+    -context 객체 속성 (맵)(생략 가능, 생략시 page,request,session,application순으로 조회해서 찾음)
          -pageScope
          -requestScope
          -sessionScope
          -applicationScope
-    -사용자 입력값
+    -사용자 입력값(맵)
          -param
          -paramValues(배열)
 
-    -header 정보
+    -header 정보(맵)
          -header
          -headerValues
-    -쿠키 cookie
-    -PageContext 객체 직접 접근
+    -쿠키 cookie(맵)
+    -(소문자p로 시작)pageContext 객체 직접 접근(포인터,참조변수)
+     :${pageContext.request.contextPath}
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
