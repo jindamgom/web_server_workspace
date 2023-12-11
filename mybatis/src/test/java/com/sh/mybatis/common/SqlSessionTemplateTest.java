@@ -19,10 +19,7 @@ public class SqlSessionTemplateTest {
     {
         SqlSession sqlSession = getSqlSession();
         assertThat(sqlSession).isNotNull();
-
-
     }
-
 
 
 }

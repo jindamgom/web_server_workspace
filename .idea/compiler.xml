@@ -6,10 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="menu" />
         <module name="hello-web" />
+        <module name="helloo-mvc" />
+        <module name="menu" />
         <module name="mybatis" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hello-mvc" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
