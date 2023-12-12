@@ -21,8 +21,12 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="${pageContext.request.contextPath}/js/tailwind.config.js"></script>
         <script>
-
-
+            <c:if test="${msg != null}">
+            alert("${msg}");
+                <%--session에 저장된 msg 속성값을 지워서 1회만 출력하게 한다 지우지 않으면 새로고침시 계속 나옴--%>
+                <%-- session.removeAttribute("msg"); --%>
+            <c:remove var="msg" scope="session"/>
+            </c:if>
         </script>
     </head>
     <body>
@@ -30,20 +34,27 @@
         <header>
             <nav class="bg-white border-gray-200">
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+
                     <a href="${pageContext.request.contextPath}" class="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="${pageContext.request.contextPath}/images/logo.svg" class="h-8" alt="Hello MVC Logo"/>
                         <span class="self-center text-2xl font-semibold whitespace-nowrap">Hello MVC</span>
                     </a>
                     <div class="flex items-center space-x-6 rtl:space-x-reverse">
-
+                        <%--  ${pageContext.request.contextPath} 앱경로        --%>
+                        <c:if test="${sessionScope.loginMember == null}">
                         <a href="${pageContext.request.contextPath}/member/memberLogin" class="text-md text-gray-600 hover:underline">로그인</a>
                         <a href="${pageContext.request.contextPath}/member/memberRegister" class="text-md text-gray-500 hover:underline">회원가입</a>
+                        </c:if>
 
-
+<%--                            서블릿에서 로그인에 성공시 attribute에 저장한 loginMember의 값을 가져와 id필드값을 띄워준다.--%>
+                            <c:if test="${sessionScope.loginMember != null}">
+                                <a href="${pageContext.request.contextPath}/member/memberDetail" class="text-md text-gray-600 hover:underline">${loginMember.name}님, 안녕하세요?</a>
+                                <a href="${pageContext.request.contextPath}/member/memberLogout" class="text-md text-gray-500 hover:underline">로그아웃</a>
+                            </c:if>
                     </div>
                 </div>
             </nav>
-            <nav class="bg-gray-50">
+            <nav class="bg-green-100">
                 <div class="max-w-screen-xl px-4 py-3 mx-auto">
                     <div class="flex items-center">
                         <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">

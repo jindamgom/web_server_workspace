@@ -1,22 +1,18 @@
 package com.sh.mybatis.member.model.service;
-
-
 import com.sh.mybatis.member.model.entity.Gender;
 import com.sh.mybatis.member.model.entity.Member;
 import com.sh.mybatis.member.model.entity.Role;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
+//1212 명시적으로 테스트들의 순서 지정하는 방법
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MemberServiceTest {
 
     MemberService memberService; //test 대상(fixture)
@@ -30,6 +26,7 @@ public class MemberServiceTest {
 
     /**
      * myBatis는 ResultSet의 데이터를 vo클래스개체로 자동변환한다.
+     * 컬럼명과 필드 명이 일치 해야한다.(언더스코어->카멜케이싱) mapUnderscoreToCamelCase
      * varchar2 / char <-> String
      * number          <-> int/double
      * date            <-> java.util.Date(기본값), java.time.localDate
@@ -116,7 +113,8 @@ public class MemberServiceTest {
 
                 assertThat(member.getGender()).isEqualTo(Gender.valueOf(gender)));
     }
-    @Disabled
+
+    @Order(1)
     @DisplayName("회원 가입")
     @Test
     public void test7() {
@@ -141,7 +139,7 @@ public class MemberServiceTest {
         assertThat(member2.getName()).isEqualTo(name);
 
     }
-    @Disabled
+    @Order(2)
     @DisplayName("회원 가입 시 오류 체크")
     @Test
     public void test8() {
@@ -161,7 +159,7 @@ public class MemberServiceTest {
         assertThat(th).isInstanceOf(Exception.class);
 
     }
-    @Disabled
+    @Order(3)
     @DisplayName("회원 정보 수정")
     @Test
     public void test9()
@@ -200,7 +198,7 @@ public class MemberServiceTest {
         assertThat(member2.getPhone()).isEqualTo(newPhone);
     }
 
-    @Disabled
+    @Order(4)
     @DisplayName("회원 비밀번호 수정하기")
     @Test
     public void test10()
@@ -220,7 +218,8 @@ public class MemberServiceTest {
         Member member2 = memberService.findById(id);
         assertThat(member2.getPassword()).isEqualTo(newPassword);
     }
-    @Disabled
+
+    @Order(5)
     @DisplayName("회원 권한 수정")
     @Test
     public void test11()
@@ -244,6 +243,7 @@ public class MemberServiceTest {
     }
 
 
+    @Order(6)
     @DisplayName("회원 삭제")
     @Test
     public void test12()

@@ -9,11 +9,11 @@
         <module name="hello-web" />
         <module name="helloo-mvc" />
         <module name="menu" />
-        <module name="mybatis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hello-mvc" target="17" />
+      <module name="mybatis" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

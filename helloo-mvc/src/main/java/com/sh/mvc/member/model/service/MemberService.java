@@ -1,8 +1,7 @@
-package com.sh.mybatis.member.model.service;
-
-import com.sh.mybatis.common.SqlSessionTemplate;
-import com.sh.mybatis.member.model.dao.MemberDao;
-import com.sh.mybatis.member.model.entity.Member;
+package com.sh.mvc.member.model.service;
+import com.sh.mvc.common.SqlSessionTemplate;
+import com.sh.mvc.member.model.dao.MemberDao;
+import com.sh.mvc.member.model.entity.Member;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
