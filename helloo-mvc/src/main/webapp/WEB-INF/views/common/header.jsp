@@ -22,7 +22,8 @@
         <script src="${pageContext.request.contextPath}/js/tailwind.config.js"></script>
         <script>
             <c:if test="${msg != null}">
-            alert("${msg}");
+            alert(`${msg}`);
+                // 1213 메시지에 여러줄 입력이 가능하도록 "에서 백틱`으로 변경하였다.
                 <%--session에 저장된 msg 속성값을 지워서 1회만 출력하게 한다 지우지 않으면 새로고침시 계속 나옴--%>
                 <%-- session.removeAttribute("msg"); --%>
             <c:remove var="msg" scope="session"/>

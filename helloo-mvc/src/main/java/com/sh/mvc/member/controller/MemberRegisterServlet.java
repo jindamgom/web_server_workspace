@@ -79,6 +79,6 @@ public class MemberRegisterServlet extends HttpServlet
 
         //4.뷰단 처리(뷰or리다이렉트)
         //등록 후 무조건 리다이렉트[해당 페이지에 머물러선 안됨]
-        resp.sendRedirect(req.getContextPath());
+        resp.sendRedirect(req.getContextPath()+"/");
     }
 }

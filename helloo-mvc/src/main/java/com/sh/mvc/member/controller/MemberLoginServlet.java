@@ -64,6 +64,16 @@ public class MemberLoginServlet extends HttpServlet {
         requestDispatcher.forward(req,resp);
     }
 
+    /**
+     * 1213 실습과제
+     *      요구사항은 다음과 같습니다.
+     *
+     * 1. 로그인시 아이디 저장 체크박스가 체크되어 있다면, WebStorage에 `saveId=아이디` 형식으로 저장합니다.
+     * 2. 로그인시 아이디 저장 체크박스가 체크해제되어 있다면, WebStorage의 `saveId`를 제거합니다.
+     * 3. 로그인페이지 `GET /mvc/member/memberLogin` 요청시 WebStorage에 저장된 `saveId` 값이 있다면,
+     *    `#id` input태그에 값을 기록하고, `#saveId`는 체크해제합니다.
+     */
+
     private MemberService memberService = new MemberService();
     /**
      * 실제 로그인 처리를 한다.
@@ -81,8 +91,20 @@ public class MemberLoginServlet extends HttpServlet {
         //2.사용자 입력값 가져오기
         String id= req.getParameter("id"); //아이디 input tag - name 값인 id
         String password = req.getParameter("password"); //비밀번호 input tag - name 값인 passwords
-        System.out.println(id + "/" + password);
 
+        //아이디 저장 체크박스
+        String idSavedChecked = req.getParameter("saveId");
+
+        //String형으로 받아올 시  : on or null
+        System.out.println("로그인시 받아온 값......"+id + "/" + password+"/"+idSavedChecked);
+        if(idSavedChecked != null)
+        {
+            System.out.println("아이디 저장에 체크하였습니다");
+            
+        }
+        else {
+            System.out.println("아이디 저장에 체크하지 않았습니다....");
+        }
 
         //3.업무로직 : 이번 요청에 처리할 작업 - 로그인(인증)
         //id와 pw로 내가 회원인것을 증명한다.->DB에서 읽어온 데이터(member객체) 비교한다.
@@ -90,7 +112,11 @@ public class MemberLoginServlet extends HttpServlet {
         //로그인 실패 (존재하지 않는 id / pw가 틀린 경우)
 
         Member member = memberService.findById(id);
+        //세션을 생성or 가져오는 코드이며 getSession() 괄호안 생략인 경우 기본값 true
+        //true:세션존재하지않을시 생성하고, 존재한다면 존재하는 세션을 반환한다.
+        //false:세션이 존재하면 세션 반환한하고, 없다면 새로생성하지않고 null반환
         HttpSession session =req.getSession();
+
 
         if(member!=null && password.equals(member.getPassword()))
         {
@@ -119,7 +145,10 @@ public class MemberLoginServlet extends HttpServlet {
         //로그인 직후 새로고침을 하면 또 로그인 요청이 들어감.
         //req.getRequestDispatcher("/index.jsp").forward(req,resp);
         //아래와 같이 수정해야한다.
-        resp.sendRedirect(req.getContextPath());
+        resp.sendRedirect(req.getContextPath()+"/");
+        //뒤에 슬래시 하나 더 붙이는 이유
+        // /mvc ->/mvc/에서 리다이렉트가 한번 더 발생해서 그것을 줄이고자 ..
+
 
     }
 }

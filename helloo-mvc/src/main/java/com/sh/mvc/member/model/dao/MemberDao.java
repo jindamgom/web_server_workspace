@@ -41,6 +41,7 @@ public class MemberDao {
 
     public int deleteMember(SqlSession session, String id)
     {
+        System.out.println("MemberDao-deleteMember id:"+id);
         return session.delete("member.deleteMember",id);
     }
 }
