@@ -1,5 +1,6 @@
 package com.sh.mvc.member.controller;
 
+import com.sh.mvc.common.HelloMvcUtils;
 import com.sh.mvc.member.model.entity.Member;
 import com.sh.mvc.member.model.service.MemberService;
 
@@ -90,7 +91,8 @@ public class MemberLoginServlet extends HttpServlet {
         
         //2.사용자 입력값 가져오기
         String id= req.getParameter("id"); //아이디 input tag - name 값인 id
-        String password = req.getParameter("password"); //비밀번호 input tag - name 값인 passwords
+        //단순 입력 비밀번호값->암호화작업 이후 이렇게 수정
+        String password = HelloMvcUtils.getEncryptedPassword(req.getParameter("password"),id); 
 
         //아이디 저장 체크박스
         String idSavedChecked = req.getParameter("saveId");
@@ -129,11 +131,13 @@ public class MemberLoginServlet extends HttpServlet {
 
             session.setAttribute("loginMember",member);
             //req.setAttribute("loginMember",member);
+            resp.sendRedirect(req.getContextPath()+"/");
         }
         else {
             //로그인 실패..
             System.out.println("로그인실패");
             session.setAttribute("msg","아이디가 존재하지 않거나, 비밀번호가 틀립니다.🙏🏻");
+            resp.sendRedirect(req.getContextPath()+"/member/memberLogin"); //get방식 [리다이렉트도 get방식이다]
         }
         
         
@@ -145,7 +149,7 @@ public class MemberLoginServlet extends HttpServlet {
         //로그인 직후 새로고침을 하면 또 로그인 요청이 들어감.
         //req.getRequestDispatcher("/index.jsp").forward(req,resp);
         //아래와 같이 수정해야한다.
-        resp.sendRedirect(req.getContextPath()+"/");
+        //resp.sendRedirect(req.getContextPath()+"/");
         //뒤에 슬래시 하나 더 붙이는 이유
         // /mvc ->/mvc/에서 리다이렉트가 한번 더 발생해서 그것을 줄이고자 ..
 

@@ -69,15 +69,8 @@ public class memberUpdateServlet extends HttpServlet
 //                (id,null,_name, null, gender, birthday, _email,_phone,hobby,0,null);
 
 
-        //3.업무로직
-        //MemberService memberService = new MemberService();
-        int result = memberService.updateMember(member);
-        System.out.println("회원 수정 결과 result : "+result);
-
+        //3.업무로직 : 세션에 저장된 값과 db의 값이 일치하는지..?
         //db정보가 성공적으로 수정되었다면 해당내용으로 session 속성 loginMember 업데이트해줘야! 반영이됨
-
-
-        //세션에 저장된 값과 db의 값이 일치하는지..?
         Member memberUpadted = memberService.findById(id);
         req.getSession().setAttribute("loginMember",member);
 

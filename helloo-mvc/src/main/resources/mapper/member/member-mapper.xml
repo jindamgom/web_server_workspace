@@ -95,4 +95,46 @@
         where
             id = #{id}
     </delete>
+
+    <!--
+        #:값 $:식별자(컬럼명,테이블명) ${searchType}:el아님, mybatis 식별자 변환문법
+        식별자컬럼에 #을 써버리면 값으로 인색해버림 where 'id' like...
+    -->
+    <select id="searchMember" resultType="member">
+        select
+            *
+        from
+            member
+        where
+            ${searchType} like '%' || #{searchKeyword} || '%'
+    </select>
+
+    <!-- 페이징 기법    -->
+    <select id="findAllPage" resultType="member">
+        select
+            *
+        from
+            member
+        order by
+            reg_date desc
+
+    </select>
+
+    <!-- result type 은 MyBatis 내장 별칭 확인   -->
+    <select id="getTotalCount" resultType="_int">
+        select
+            count(*)
+        from
+            member
+    </select>
+
+
+    <select id="getTotalCount2" resultType="_int">
+        select
+            count(*)
+        from
+            member
+        where
+            ${searchType} like '%' || #{searchKeyword} || '%'
+    </select>
 </mapper>

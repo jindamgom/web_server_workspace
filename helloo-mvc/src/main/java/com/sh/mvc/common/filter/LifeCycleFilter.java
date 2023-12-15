@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * <pre>
  * filter의 생명주기~
  *
  * -서버 구동시 필터 객체를 생성함. 그 이후는 객체를 재사용(싱글턴 패턴)
@@ -20,7 +21,7 @@ import java.io.IOException;
  * 
  * 
  * 4.destroy 호출
- * 
+ * </pre>
  */
 
 

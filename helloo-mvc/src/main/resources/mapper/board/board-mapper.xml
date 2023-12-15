@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 1215 게시판 전용 mapper, db에 쿼리 던져주기 -->
+<mapper namespace="board">
+
+    <select id="findById" resultType="board">
+
+        select
+        *
+        from
+        board
+        where
+        id = #{id}
+    </select>
+
+    <!-- 1.board 테이블의 모든 값 가져오기. -->
+    <select id="findAll" resultType="board">
+        select
+        *
+        from
+        board
+        order by
+        reg_date desc
+
+    </select>
+
+    <insert id="insertBoard">
+        insert into
+            board
+        values(
+        seq_board_id.nextVal,#{title},#{memberId},#{content},#{readCount},#{regDate})
+    </insert>
+
+    <update id = "updateBoard">
+        update
+            board
+        set
+            title = #{title},
+            content = #{content}
+        where
+            id = #{id}
+    </update>
+
+    <delete id="deleteBoard">
+        delete
+        from
+        board
+        where
+        id = #{id}
+    </delete>
+
+    <select id="getTotalCount" resultType="_int">
+        select
+            count(*)
+        from
+            board
+
+    </select>
+
+    <!-- 페이징 기법    -->
+    <select id="findAllPage" resultType="board">
+        select
+        *
+        from
+        board
+        order by
+        reg_date desc
+
+    </select>
+
+</mapper>

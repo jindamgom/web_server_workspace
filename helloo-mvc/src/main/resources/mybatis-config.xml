@@ -56,8 +56,9 @@
             </dataSource>
         </environment>
     </environments>
-<!--    sql을 읽어줌    -->
+    <!--    sql을 읽어줌  1215 :  board mapper 추가 -->
     <mappers>
         <mapper resource="mapper/member/member-mapper.xml"/>
+        <mapper resource="mapper/board/board-mapper.xml"/>
     </mappers>
 </configuration>

@@ -41,7 +41,8 @@ public class LogFilter extends HttpFilter implements Filter {
         //filterChain:필터묶음 , 여러 필터를 그룹핑하여 관리.
         // - 다음 필터가 있는 경우 해당 filter#doFilter 호출
         // - 마지막 필터인 경우 Servlet을 호출.
-        super.doFilter(request,response,chain); //chain.doFilter(request,response)
+        chain.doFilter(request,response);
+        //super.doFilter(request,response,chain); //chain.doFilter(request,response)
 
         //후처리 (응답 직전)
 //        System.out.println("후-------------------------------------------");
