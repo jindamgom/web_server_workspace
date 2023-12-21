@@ -18,6 +18,8 @@
                         <p class="text-center text-8xl">🍈</p>
                         <p class="text-center text-8xl hidden md:block">🍏</p>
                 </div>
+                <img src="https://media2.giphy.com/media/0wAz4GyB30IiKGfCqj/giphy.gif?cid=6c09b952ebiauimjb21ubrbwbxbb6e4y54o6v94ex4j4lcf3&ep=v1_stickers_related&rid=giphy.gif&ct=s">
+
             </div>
 <%--footer 부분을 load한다.--%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

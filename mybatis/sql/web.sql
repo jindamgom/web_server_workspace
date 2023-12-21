@@ -325,3 +325,49 @@ commit;
  select count(*)  from board;
 select * from board;
 select * from attachment;
+
+
+------------------------------------------------------------------------------------------------------------------------
+--1218 ncs test용 테이블
+------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE TB_USER(
+USER_NO NUMBER PRIMARY KEY,
+USER_ID VARCHAR2(50) UNIQUE NOT NULL,
+USER_NAME VARCHAR2(50) NOT NULL,
+USER_AGE NUMBER NOT NULL
+);
+
+CREATE SEQUENCE SEQ_UNO
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- 샘플 데이터 삽입
+INSERT INTO TB_USER VALUES(SEQ_UNO.NEXTVAL, 'gd_hong', '홍길동', 20);
+INSERT INTO TB_USER VALUES(SEQ_UNO.NEXTVAL, 'sh_han', '한소희', 28);
+INSERT INTO TB_USER VALUES(SEQ_UNO.NEXTVAL, 'jm_park', '지민', 27);
+COMMIT;
+
+select * from tb_user;
+
+
+
+--학생 테이블
+create table student(
+student_number NUMBER PRIMARY KEY,
+student_name VARCHAR2(60) NOT NULL,
+korean_score NUMBER NOT NULL,
+english_score NUMBER NOT NULL,
+math_score NUMBER NOT NULL
+);
+
+create table manager(
+manager_number number primary key,
+manager_name varchar(60) not null,
+manager_hire_date not null
+);
+
+
+
+
+

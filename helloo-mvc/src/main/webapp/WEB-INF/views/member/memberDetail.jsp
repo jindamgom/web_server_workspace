@@ -18,6 +18,7 @@
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 마이페이지
             </h1>
+            <p>${pageContext.request.contextPath}</p>
             <form name="memberUpdateFrm" action="${pageContext.request.contextPath}/member/memberUpdate" method="post" class="space-y-4 md:space-y-6" >
                 <div>
                     <label for="id" class="block mb-2 text-sm font-medium text-gray-900 after:content-['*'] after:ml-0.5 after:text-red-500">아이디</label>

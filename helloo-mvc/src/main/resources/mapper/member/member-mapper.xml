@@ -110,22 +110,41 @@
     </select>
 
     <!-- 페이징 기법    -->
+    <!-- 1219 where절 추가.
+        선택적으로 where절을 실행 할 수 있도록 if문을 사용한다.
+       -->
     <select id="findAllPage" resultType="member">
         select
             *
         from
             member
+        <if test="searchType !=null and searchType !='' and searchKeyword !=null and searchKeyword !='' ">
+        where
+            ${searchType} like '%' || #{searchKeyword} || '%'
+        </if>
         order by
             reg_date desc
 
     </select>
 
-    <!-- result type 은 MyBatis 내장 별칭 확인   -->
+    <!-- result type 은 MyBatis 내장 별칭 확인  1219 수정 -->
+    <!--
+        where 태그 하위 if구분이 하나라도 실행 될때만 where절을 작성[실행]하게 된다.
+        - where 다음에 and/or 연산자가 나오면 삭제 처리
+        - 여러개의 if문 처리에 적합함..
+    -->
     <select id="getTotalCount" resultType="_int">
         select
             count(*)
         from
             member
+        <where>
+            <if test="searchType !=null and searchType !='' and searchKeyword !=null and searchKeyword !='' ">
+                ${searchType} like '%' || #{searchKeyword} || '%'
+            </if>
+        </where>
+
+
     </select>
 
 

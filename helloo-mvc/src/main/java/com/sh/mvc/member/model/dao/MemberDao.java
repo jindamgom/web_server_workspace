@@ -75,7 +75,7 @@ public class MemberDao {
         RowBounds rowBounds = new RowBounds(offset,limit);
 
         //쿼리에 전달할 값 null(어차피 전체 조회라), 그담에 rowBounds
-        return session.selectList("member.findAllPage",null, rowBounds);
+        return session.selectList("member.findAllPage",param, rowBounds);
 
     }
     
@@ -87,9 +87,9 @@ public class MemberDao {
     }
 
 
-    //페이징용으로 하나 더 만든 메소드
+    //페이징용으로 하나 더 만든 메소드 2->1로 수정
     public int getToTalCount(SqlSession session, Map<String, Object> param)
     {
-        return session.selectOne("member.getTotalCount2",param);
+        return session.selectOne("member.getTotalCount",param);
     }
 }

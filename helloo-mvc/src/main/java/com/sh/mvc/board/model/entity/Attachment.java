@@ -2,20 +2,20 @@ package com.sh.mvc.board.model.entity;
 
 import java.time.LocalDateTime;
 
-public class attachment
+public class Attachment
 {
     private long id;
-    private int boardId;
+    private long boardId;
     private String originalFilename;
     private String renamedFilename;
     private LocalDateTime regDate;
 
     //alt+insert
 
-    public attachment() {
+    public Attachment() {
     }
 
-    public attachment(long id, int boardId, String originalFilename, String renamedFilename, LocalDateTime regDate) {
+    public Attachment(long id, int boardId, String originalFilename, String renamedFilename, LocalDateTime regDate) {
         this.id = id;
         this.boardId = boardId;
         this.originalFilename = originalFilename;
@@ -31,11 +31,11 @@ public class attachment
         this.id = id;
     }
 
-    public int getBoardId() {
+    public long getBoardId() {
         return boardId;
     }
 
-    public void setBoardId(int boardId) {
+    public void setBoardId(long boardId) {
         this.boardId = boardId;
     }
 

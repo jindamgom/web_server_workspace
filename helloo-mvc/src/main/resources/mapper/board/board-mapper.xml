@@ -5,32 +5,119 @@
 <!-- 1215 게시판 전용 mapper, db에 쿼리 던져주기 -->
 <mapper namespace="board">
 
-    <select id="findById" resultType="board">
+    <!-- mybatis를 이용하여 조인쿼리를 작성해보자.
+         resultType 대신 resultMap 사용
+         1:n 관계 <collection>사용
+         1:1 관계 <assocation> 사용
+
+        -->
+    <select id="findById" resultMap="BoardVoMap">
 
         select
-        *
+            b.*,
+            m.name member_name,
+            a.id attach_id,
+            a.board_id,
+            a.original_filename,
+            a.renamed_filename,
+            a.reg_date attach_reg_date
         from
-        board
+            board b left join member m
+            on b.member_id = m.id
+            left join attachment a
+            on b.id = a.board_id
         where
-        id = #{id}
+            b.id = #{id}
     </select>
+    <!--
+        <id/> 식별자 컬럼
+        <result/> 식별자가 아닌 컬럼
+        <collection/> 1:N 관계에서 N에 해당하는 속성처리 (list)
+        <association/> 1:1 관계에서 상대 1에 해당하는 속성 처리 (vo객체)
+    -->
+    <resultMap id="BoardVoMap" type="boardVo">
+        <id column = "id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="member_id" property="memberId"/>
+        <result column="content" property="content"/>
+        <result column="read_count" property="readCount"/>
+        <result column="reg_date" property="regDate"/>
+
+        <!--1대1 관계인 경우 [완료] BoardVo의 한 필드가 아닌, Member클래스 통째로 사용도 가능하다고함.-->
+<!--        <association property="userName" javaType="String">-->
+<!--            <id column="name" property="name"/>-->
+<!--        </association>-->
+
+            <!-- member 클래스갖다써보기..시도라도 해보자!   https://chikeem90.tistory.com/135     -->
+            <!-- property:필드명 javaType=타입  -->
+            <association property="member"  javaType="Member" >
+                <id column="member_id" property="id"/>
+                <result column="member_name" property="name"/>
+            </association>
+
+        <!--
+            여러개인 경우 여러번 실행
+             property:필드명
+             ofTpye:속성(클래스명)
+         -->
+        <collection property="attachments" ofType="attachment">
+            <id column="attach_id" property="id"/>
+            <result column ="board_id" property="boardId"/>
+            <result column ="original_filename" property="originalFilename"/>
+            <result column ="renamed_filename" property="renamedFilename"/>
+            <result column ="attach_reg_date" property="regDate"/>
+        </collection>
+
+    </resultMap>
+
+
 
     <!-- 1.board 테이블의 모든 값 가져오기. -->
-    <select id="findAll" resultType="board">
+    <select id="findAll" resultType="BoardVo">
         select
-        *
+            b.* ,
+            (select count(*) from attachment where board_id= b.id) attach_count,
+            (select count(*) from board_comment where board_id = b.id) comment_count
         from
-        board
+            board b
         order by
-        reg_date desc
-
+            reg_date desc
     </select>
 
+<!--    <insert id="insertBoard">-->
+<!--        insert into-->
+<!--            board-->
+<!--        values(-->
+<!--        seq_board_id.nextVal,#{title},#{memberId},#{content},#{readCount},default)-->
+<!--    </insert>-->
     <insert id="insertBoard">
         insert into
-            board
+        board (id, title, member_id, content)
         values(
-        seq_board_id.nextVal,#{title},#{memberId},#{content},#{readCount},#{regDate})
+        seq_board_id.nextval,
+        #{title},
+        #{memberId},
+        #{content}
+        )
+        <selectKey order="AFTER" resultType="_int" keyProperty="id">
+            select
+            seq_board_id.currval
+            from
+            dual
+        </selectKey>
+    </insert>
+
+    <insert id="insertAttachment">
+        insert into
+            attachment(id,board_id,original_filename,renamed_filename)
+        values(
+            seq_attachment_id.nextval,
+            #{boardId},
+            #{originalFilename},
+            #{renamedFilename}
+
+        )
+
     </insert>
 
     <update id = "updateBoard">
@@ -41,6 +128,7 @@
             content = #{content}
         where
             id = #{id}
+
     </update>
 
     <delete id="deleteBoard">
@@ -56,18 +144,95 @@
             count(*)
         from
             board
-
     </select>
 
-    <!-- 페이징 기법    -->
-    <select id="findAllPage" resultType="board">
+    <select id="getTotalReply" resultType="_int">
         select
-        *
+        count(*)
         from
         board
-        order by
-        reg_date desc
+    </select>
+
+<!--    &lt;!&ndash; 페이징 기법    &ndash;&gt;-->
+<!--    <select id="findAllPage" resultType="board">-->
+<!--        select-->
+<!--        *-->
+<!--        from-->
+<!--        board-->
+<!--        order by-->
+<!--        reg_date desc-->
+
+<!--    </select>-->
+
+
+    <!-- 복합대입연산자 불가, -->
+    <update id="updateBoardReadCount">
+        update
+            board
+        set
+            read_count = read_count+1
+        where
+            id= #{id}
+    </update>
+
+    <!-- 1221 첨부파일 삭제 sql    -->
+    <delete id="deleteAttachment">
+        delete
+        from
+            attachment
+        where
+        id = #{id}
+    </delete>
+
+
+    <select id="findCommentByBoardId" resultType="boardComment">
+        select *
+        from
+        board_comment
+        where
+        board_id = #{boardId}
+        start with
+        comment_level = 1
+        connect by
+        prior id = parent_comment_id
+        order siblings by id
+    </select>
+
+    <insert id="insertBoardComment">
+        insert into
+            board_comment
+        values(
+            seq_board_comment_id.nextval,
+            #{boardId},
+            #{memberId},
+            #{content},
+            #{commentLevel},
+            #{parentCommentId},
+            default)
+        <selectKey order="AFTER" resultType="_long" keyProperty="id">
+            select
+                seq_board_comment_id.currval
+            from
+                dual
+
+        </selectKey>
+    </insert>
+
+    <select id = "findCommentById" resultType="boardComment">
+
+        select *
+        from
+            board_comment
+        where
+            id = #{id}
 
     </select>
+    <delete id="deleteBoardComment">
+        delete
+        from
+            board_comment
+        where
+            id=#{id}
+    </delete>
 
 </mapper>

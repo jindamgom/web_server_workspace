@@ -2,8 +2,13 @@ package com.sh.mvc.board.model.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * entity
+ * db 테이블과 매칭되는 클래스
+ */
 public class Board
 {
+
     private long id; //int보다 long
     private String title;
     private String memberId;
@@ -82,4 +87,6 @@ public class Board
                 ", regDate=" + regDate +
                 '}';
     }
+
+
 }

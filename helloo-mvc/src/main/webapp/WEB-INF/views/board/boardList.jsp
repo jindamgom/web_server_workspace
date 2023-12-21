@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container mx-auto my-6">
@@ -17,9 +18,13 @@
             게시판
         </h1>
     </div>
+    <c:if test="${loginMember!=null}">
     <div class="flex justify-end">
-        <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">글쓰기</button>
+        <button type="button"
+                onClick="location.href='${pageContext.request.contextPath}/board/boardCreate';"
+                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">글쓰기</button>
     </div>
+    </c:if>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -36,12 +41,34 @@
             <c:forEach items="${boards}" var="board" varStatus="vs">
                 <tr class="odd:bg-white even:bg-gray-50 border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${board.id}</th>
-                    <td class="px-6 py-4">${board.title}</td>
-                    <td class="px-6 py-4">${board.memberId}</td>
-                    <td class="px-6 py-4">${board.regDate}</td>
                     <td class="px-6 py-4">
-                        <img class="w-[16px]" src="../images/file.png" alt="">
+                        <a href="${pageContext.request.contextPath}/board/BoardDetail?id=${board.id}"
+                           class="hover:underline">${fn:escapeXml(board.title)}</a>
+                        <%--  1221 해당 게시글에 달린 댓글 갯수 보여주기 select count(*) from board_comment where board_id=97; --%>
+
+                        <c:if test="${board.commentCount gt 0 and board.commentCount lt 10}">
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">${board.commentCount}</span>
+                        </c:if>
+                        <c:if test="${board.commentCount ge 10}">
+                            <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">${board.commentCount}</span>
+                        </c:if>
+
+
+
                     </td>
+                    <td class="px-6 py-4">${board.memberId}</td>
+                    <td class="px-6 py-4">
+
+                                <fmt:parseDate value="${board.regDate}" pattern="yyyy-MM-dd'T'HH:mm" var="regDate"/>
+                                <fmt:formatDate value="${regDate}" pattern="yy/MM/dd HH:mm"/>
+                    </td>
+
+                    <td class="px-6 py-4">
+                        <c:if test="${board.attachCount gt 0}">
+                        <img class="w-[16px]" src="../images/file.png" alt="">
+                        </c:if>
+                    </td>
+
                     <td class="px-6 py-4">${board.readCount}</td>
                 </tr>
             </c:forEach>

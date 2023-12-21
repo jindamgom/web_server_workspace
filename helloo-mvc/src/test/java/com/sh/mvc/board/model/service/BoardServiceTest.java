@@ -1,5 +1,6 @@
 package com.sh.mvc.board.model.service;
 import com.sh.mvc.board.model.entity.Board;
+import com.sh.mvc.board.model.vo.BoardVo;
 import com.sh.mvc.member.model.entity.Gender;
 import com.sh.mvc.member.model.entity.Member;
 import com.sh.mvc.member.model.entity.Role;
@@ -92,10 +93,9 @@ public class BoardServiceTest {
     @Test
     public void test3()
     {
-//        insert into web.board (id,title,member_id,content,reg_date,read_count) values
-//            (seq_board_id.nextval,'비 좀 그만 내려라','hyejin','바지 다젖었어요 차라리 눈이 나은듯',default,0);
-        Board board =
-                new Board(0, "Test용 타이틀입니다!", "농담곰","농담곰귀여워", 0, LocalDateTime.now());
+        BoardVo board = new BoardVo();
+//        BoardVo board =
+//                new Board(0, "Test용 타이틀입니다!", "농담곰","농담곰귀여워", 0, LocalDateTime.now());
 
         Throwable th = catchThrowable(()->
         {
@@ -123,7 +123,7 @@ public class BoardServiceTest {
 
         System.out.println(board);
         //update 쿼리를 날리러..service 일시키기.
-        int result = boardService.updateBoard(board);
+        int result = boardService.updateBoard((BoardVo) board);
         assertThat(result).isGreaterThan(0);
     }
 
@@ -158,7 +158,7 @@ public class BoardServiceTest {
         int page = 1;
         int limit = 15; //한 페이지당 글 15개씩 보이도록 지정함.
         Map<String,Object> param = Map.of("page",page,"limit",limit);
-        List<Board> boards = boardService.findAll(param);
+        List<BoardVo> boards = boardService.findAll(param);
         assertThat(boards)
                 .isNotNull()
                 .isNotEmpty();

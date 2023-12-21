@@ -135,9 +135,10 @@ public class HelloMvcUtils {
     public static String getPagebar(int page, int limit, int totalCount, String url)
     {
         StringBuilder pagebar = new StringBuilder();
+
         //mvc/admin/memberList
         //mvc/admin/searchMember?search-type=xxx&search-keyword=yy
-
+        //검색 이후 바뀐 url에도 페이징하기 위해 3항연산자 사용
         url += (url.contains("?")) ? "&page=" : "?page=";
 
         //전체 페이지수..
@@ -155,7 +156,7 @@ public class HelloMvcUtils {
         //1.이전 버튼
         if(pageNo ==1)
         {
-            //비활성화 이전
+            //비활성화 이전 , 페이지가 1번째면 더 이상 이전으로 갈 페이지가 없으므로 비활성화.
             pagebar.append(previousDisabled);
         }
         else {
@@ -165,6 +166,7 @@ public class HelloMvcUtils {
         }
 
         //2.페이지 넘버
+        //11,12,13,14,15 페이지까지 만들었는데 12페이지 까지 필요할 때, 아래의 and 연산자 사용
         while(pageNo <= pagebarEnd && pageNo <= totalPage)
         {
             if(pageNo == page)
@@ -182,7 +184,7 @@ public class HelloMvcUtils {
         //3.다음 버튼
         if(pageNo>totalPage)
         {
-            //비활성화 다음(더 이상 넘어갈 페이지가 없을 때)
+            //비활성화 다음(더 이상 넘어갈 페이지가 없을 때, 비활성화)
             pagebar.append(nextDisabled);
         }
         else {
@@ -195,5 +197,16 @@ public class HelloMvcUtils {
 
         return pagebar.toString();
 
+    }
+
+    //1219 개행문자를 <br>로 변환하는 메소드
+    public static String convertLineFeedToBr(String str)
+    {
+        return str.replaceAll("\n","<br/>");
+    }
+
+    public static String escapeHtml(String str) {
+
+        return str.replaceAll("<","&lt;").replaceAll(">","&gt;");
     }
 }

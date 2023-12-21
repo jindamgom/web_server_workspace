@@ -55,8 +55,8 @@ import java.util.Map;
 //
 //}
 
-//@WebServlet("/admin/searchMember")
-public class _AdminSearchMemberServlet extends HttpServlet {
+@WebServlet("/admin/searchMember")
+public class AdminSearchMemberServlet extends HttpServlet {
     private MemberService memberService = new MemberService();
 
     /**

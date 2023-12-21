@@ -38,8 +38,8 @@ import java.util.Map;
  * </pre>
  */
 
-@WebServlet("/admin/memberList")
-public class AdminMemberListServlet extends HttpServlet {
+//@WebServlet("/admin/memberList")
+public class _AdminMemberListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doGet(req, resp);
@@ -64,6 +64,7 @@ public class AdminMemberListServlet extends HttpServlet {
         //1)content영역 : 전체 조회 쿼리 + RowBounds | Top-n 분석 쿼리
         MemberService memberService = new MemberService();
         List<Member> members = memberService.findAll(param);
+
 
         //2)pageBar 영역
         int totalCount = memberService.getToTalCount();
