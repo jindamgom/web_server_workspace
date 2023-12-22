@@ -60,8 +60,13 @@ public class MemberLoginServlet extends HttpServlet {
         //Referer(사용자가 머물렀던 페이지)를 세션에 저장한다.
         String referer = req.getHeader("Referer");
         System.out.println("referer:"+referer);
-        req.getSession().setAttribute("next",referer);
 
+        //1222 추가 - 현재 페이지가 로그인 페이지가 아닐때만 저장.
+        //로그인에 실패했을 경우, 다시 로그인 페이지로 돌아오는데 그럴 경우 referer에 로그인 페이지가 저장되어
+        //사용자가 머물렀던 페이지가 로그인 페이지로 갱신되어버림. 그것을 막고자 로그인페이지가 아닌 경우만 referer에 저장.
+        //"http://localhost:8080/mvc/member/memberLogin"
+        if (!referer.contains("member/memberLogin"))
+            req.getSession().setAttribute("next",referer);
 
         RequestDispatcher requestDispatcher =  req.getRequestDispatcher("/WEB-INF/views/member/memberLogin.jsp");
         requestDispatcher.forward(req,resp);

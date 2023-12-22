@@ -9,6 +9,7 @@
         <module name="hello-web" />
         <module name="helloo-mvc" />
         <module name="menu" />
+        <module name="ajax" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

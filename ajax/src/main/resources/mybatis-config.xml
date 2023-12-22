@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="datasource.properties"/>
+
+    <settings>
+        <!--   NULL 데이터가 전달된 경우 NULL값으로 처리     -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <!--   member_name컬럼은 memberName 필드와 매핑    -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--mapper-result에 사용할 별칭 -->
+    <typeAliases>
+<!--        <typeAlias type="com.sh.mybatis.member.model.entity.Member" alias="member"/>-->
+        <!--
+            위에 처럼 특정 class를 별칭 지정해주는 것도 있고,
+            일괄적으로 별칭처리해주는 기능도 제공한다.
+            package 하위 모든 클래스가 소문자로 시작되는 별칭으로 등록된다.
+            Member->member
+            MemberAddress->memberAdderess
+            -->
+        <package name="com.sh.ajax"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!--
+                transactionManager 트랜잭션 관리 책임 설정
+                -JDBC datasource로부터 직접 connection을 가져와서 관리
+                -MANAGED 컨테이너(톰캣) 트랜잭션을 관리
+             -->
+            <dataSource type="POOLED">
+            <!--
+                POOLED DBCP 설정 (Database Connection Pool)
+                :매번 Connection을 생성/폐기하면 효율성이 떨어진다..
+                그래서! Connection 다수를 생성해서
+                pool에서 관리하는 것.
+                사용 후 반납하면 폐기하지 않고 이 후 재사용한다.
+                      -->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mapper/student/student-mapper.xml"/>
+    </mappers>
+</configuration>

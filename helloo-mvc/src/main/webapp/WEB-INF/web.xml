@@ -6,6 +6,26 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         id="WebApp_ID"
         version="4.0">
+    <!--
+        web.xml 배포서술자 deploy descriptor
+        CATALNINA_HOME/conf/web.xml를 오버라이드
+        더 많은 설정이 있는데 내가 원하는것만 이 xml에 추가함.
+        1.서블릿 등록
+        2.필터등록
+        3.리스너 등록
+        4.에러페이지 등록 (new)
 
+        -->
+
+<!-- 개발 시에는 아래의 에러 코드를 주석처리-->
   <display-name>Archetype Created Web Application</display-name>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/WEB-INF/views/common/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/common/404.jsp</location>
+  </error-page>
+
 </web-app>

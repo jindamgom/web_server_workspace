@@ -43,12 +43,19 @@
                     수정
                 </button>
                 <button type="button"
+                        onClick="confirm('정말 삭제하시겠습니까?💦') && document.boardDeleteFrm.submit()"
                         class="px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-primary-200">
                     삭제
                 </button>
             </div>
+            <form action="${pageContext.request.contextPath}/board/boardDelete"
+                  name="boardDeleteFrm"
+                  method="post" >
+                    <input type = "hidden" name="id" value="${board.id}">
+            </form>
         </c:if>
     </div>
+
 
     <!-- 댓글 폼 -->
     <div class="w-full my-2">

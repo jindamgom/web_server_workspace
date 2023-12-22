@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/mybatis/pom.xml" />
         <option value="$PROJECT_DIR$/hello-mvc/pom.xml" />
         <option value="$PROJECT_DIR$/helloo-mvc/pom.xml" />
+        <option value="$PROJECT_DIR$/ajax/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
