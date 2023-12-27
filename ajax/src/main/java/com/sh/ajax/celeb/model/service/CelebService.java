@@ -1,0 +1,50 @@
+package com.sh.ajax.celeb.model.service;
+
+import com.sh.ajax.celeb.model.dao.CelebDao;
+import com.sh.ajax.celeb.model.entity.Celeb;
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
+
+import static com.sh.ajax.common.SqlSessionTemplate.getSqlSession;
+
+public class CelebService
+{
+    CelebDao celebDao = new CelebDao();
+
+
+    public List<Celeb> findAll() {
+        SqlSession session = getSqlSession();
+        List<Celeb> celebs = celebDao.findByAll(session);
+        session.close();
+        return celebs;
+    }
+
+    public Celeb findById(long id)
+    {
+        SqlSession session = getSqlSession();
+        Celeb celeb = celebDao.findById(session,id);
+        session.close();
+        return celeb;
+    }
+
+    public int insertCeleb(Celeb celeb)
+    {
+        int result = 0;
+        SqlSession session = getSqlSession();
+        result = celebDao.insertCeleb(session,celeb);
+        try
+        {
+            session.commit();
+        }
+        catch(Exception e)
+        {
+            session.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+        return result;
+    }
+}

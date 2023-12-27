@@ -23,7 +23,7 @@
     <li><a href="${pageContext.request.contextPath}/text/text.jsp">text</a></li>
     <li><a href="${pageContext.request.contextPath}/xml/xml.jsp">xml</a></li>
     <li><a href="${pageContext.request.contextPath}/xml/xml2.jsp">xml 실습문제</a></li>
-    <li><a href="${pageContext.request.contextPath}/text/text.jsp">text</a></li>
+    <li><a href="${pageContext.request.contextPath}/json/json.jsp">json</a></li>
 </ul>
 
 </body>

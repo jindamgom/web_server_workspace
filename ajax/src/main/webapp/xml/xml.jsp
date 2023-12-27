@@ -13,6 +13,9 @@
             border:  1px solid #000;
             border-collapse: collapse;
         }
+        table img{
+            width:200px;
+        }
 
     </style>
 </head>
@@ -31,6 +34,21 @@
         </tbody>
 
     </table>
+
+    <button id="btn-celeb">Celeb 확인</button>
+        <table id="celebs">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>profile</th>
+                <th>type</th>
+            <tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
 
     <script
             src="https://code.jquery.com/jquery-3.7.1.js"

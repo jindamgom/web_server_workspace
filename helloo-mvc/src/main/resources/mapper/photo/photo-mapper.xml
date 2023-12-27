@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="photo">
+<!--    <select id="findById" resultType="com.sh.mybatis.member.model.entity.Member">-->
+    <select id="findById" resultType="photo">
+
+
+<!--   멀티 라인 가능
+       #{id} 전달된 id값으로 치환 java jdbc에선 ?로 사용했었음.
+       id="findById" 에서 id는 태그 식별자
+       resultType ResultSet이 한행이 변환될 타입 (fullname or alias)
+       위에 패키지명까지 합쳐서 풀로 적는게 fullname
+       1211
+       full name에서 alias로 변경. (config에서 별칭설정해줘야한다)
+-->
+        select
+            *
+        from
+            member
+        where
+            id = #{id}
+    </select>
+
+    <!--
+        1.resultType은 꼭 작성하자.
+        2.resultType의 속성은 한 행과 매칭되는 타입을 작성한다.
+        3.내가 받고 싶은건 리스트이지만, member 한행 한행이 모여서 list가 되는 것
+
+        -->
+    <select id="findAll" resultType="photo">
+        select
+        *
+        from
+            photo
+        order by
+            reg_date desc
+
+    </select>
+
+
+    <select id="findByName" resultType="member">
+        select
+        *
+        from
+            member
+        where
+            name like '%' ||#{name} ||'%'
+
+    </select>
+
+    <select id="findByGender" resultType="member">
+        select
+        *
+        from
+        member
+        where
+        gender = #{gender}
+    </select>
+
+
+    <!--    select문에만 resultType 명시, insert에는 기본이라 안적어도 됨
+            insert시 넘어가는건 member객체라 필드값만 적어주면 ok
+    -->
+    <insert id="insertMember">
+        insert into
+            member
+        values(
+            #{id},#{password},#{name},#{role},#{gender},#{birthday},
+            #{email},#{phone},#{hobby, typeHandler=ListStringTypeHandler},default,default
+        )
+    </insert>
+
+    <update id = "updateMember">
+        update
+            member
+        set
+            name = #{name},
+            password = #{password},
+            role = #{role},
+            gender = #{gender},
+            birthday = #{birthday},
+            email = #{email},
+            phone = #{phone},
+            hobby = #{hobby, typeHandler=ListStringTypeHandler}
+        where
+            id = #{id}
+    </update>
+
+    <delete id="deleteMember">
+        delete
+        from
+            member
+        where
+            id = #{id}
+    </delete>
+
+    <!--
+        #:값 $:식별자(컬럼명,테이블명) ${searchType}:el아님, mybatis 식별자 변환문법
+        식별자컬럼에 #을 써버리면 값으로 인색해버림 where 'id' like...
+    -->
+    <select id="searchMember" resultType="member">
+        select
+            *
+        from
+            member
+        where
+            ${searchType} like '%' || #{searchKeyword} || '%'
+    </select>
+
+    <!-- 페이징 기법    -->
+    <!-- 1219 where절 추가.
+        선택적으로 where절을 실행 할 수 있도록 if문을 사용한다.
+       -->
+    <select id="findAllPage" resultType="member">
+        select
+            *
+        from
+            member
+        <if test="searchType !=null and searchType !='' and searchKeyword !=null and searchKeyword !='' ">
+        where
+            ${searchType} like '%' || #{searchKeyword} || '%'
+        </if>
+        order by
+            reg_date desc
+
+    </select>
+
+    <!-- result type 은 MyBatis 내장 별칭 확인  1219 수정 -->
+    <!--
+        where 태그 하위 if구분이 하나라도 실행 될때만 where절을 작성[실행]하게 된다.
+        - where 다음에 and/or 연산자가 나오면 삭제 처리
+        - 여러개의 if문 처리에 적합함..
+    -->
+    <select id="getTotalCount" resultType="_int">
+        select
+            count(*)
+        from
+            photo
+    </select>
+
+
+    <select id="getTotalCount2" resultType="_int">
+        select
+            count(*)
+        from
+            member
+        where
+            ${searchType} like '%' || #{searchKeyword} || '%'
+    </select>
+</mapper>

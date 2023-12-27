@@ -10,45 +10,41 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * <pre></pre>
+ * <pre>
  * Filter
- * -servlet 전후 처리를 담당하는 클래스..
- * -공통 코드를 관리 : 인코딩처리, 인증/인가처리, 응답파일 압축 등.....
+ * - Servlet 전후처리를 담당하는 클래스
+ * - 공통코드를 관리 : 인코딩처리, 인증/인가처리, 응답파일 압축등
  *
+ * Filter클래스를 만드는 방법
+ * 1. javax.servlet.Filter인터페이스를 구현
+ *  - doFilter(ServletRequest, ServletResponse, FilterChain) 오버라이드
+ * 2. javax.servlet.http.HttpFilter추상클래스를 상속
+ *  - doFilter(HttpServletRequest, HttpServletResponse, FilterChain) 오버라이드
+ *  - ServletdRequest, ServletResponse부모타입을 상속한 HttpServletRequest, HttpServletResponse
+ *  - down-casting할 필요없이 즉시 사용가능해서 편리함.
  *
- *
- * -filter class를 만드는 방법 두가지
- *  1.javax.servlet.Filter 인터페이스를 구현
- *   -doFilter(ServletRequest.ServletResponse,FilterChain) 오버라이드
- *   
- *  2.javax.servlet.http.HttpFilter클래스를 상속
- *   -doFilter(HttpServletRequest, HttpServletResponse,FilterChain) 오버라이드
- *   -ServletRequest , ServletResponse 부모타입을 상속한 HttpServletRequest, HttpServletResponse
- *   -down-casting 할 필요 없이 즉시 사용 가능 - 편리
  */
-
-@WebFilter("/*") //모든 uri 필터링하기.
-public class LogFilter extends HttpFilter implements Filter {
+@WebFilter("/*")
+public class LogFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        //전처리(요청 직후)
+        // 전처리 (요청직후)
         String uri = request.getRequestURI();
         String method = request.getMethod();
-//        System.out.println("전===========================================");
-//        System.out.printf("%s %s\n",method,uri);
-//        System.out.println("전-------------------------------------------");
+        System.out.println("======================================================");
+        System.out.printf("%s %s\n", method, uri);
+        System.out.println("------------------------------------------------------");
 
-        //filterChain:필터묶음 , 여러 필터를 그룹핑하여 관리.
-        // - 다음 필터가 있는 경우 해당 filter#doFilter 호출
-        // - 마지막 필터인 경우 Servlet을 호출.
-        chain.doFilter(request,response);
-        //super.doFilter(request,response,chain); //chain.doFilter(request,response)
+        // filterChain : filter묶음(여러 Filter를 그룹핑해서 관리)
+        // - 다음 Filter 있는 경우, 해당 Filter#doFilter 호출
+        // - 마지막 Filter인 경우, Servlet 호출
+        // super.doFilter(request, response, chain); // chain.doFilter(request, response)
+        chain.doFilter(request, response);
 
-        //후처리 (응답 직전)
-//        System.out.println("후-------------------------------------------");
-//        System.out.println(response.getStatus());
-//
-//        System.out.println("후-------------------------------------------");
-//        System.out.println("");
+        // 후처리 (응답직전)
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(response.getStatus());
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println();
     }
 }

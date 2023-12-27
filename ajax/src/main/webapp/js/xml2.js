@@ -13,25 +13,16 @@ document.querySelector("#btn-product").onclick = () =>{
 
             const root = xmlDoc.querySelector(":root");
             const products = xmlDoc.querySelectorAll("Product");
-            products.forEach((Product)=>
-            {
-                //console.log(Product); //Product태그 묶음으로 나옴.
-                const childTags = Product.children;
-                for(let i=0; i<childTags.length; i++)
-                {
-                    console.log(childTags[i].textContent);
-                }
-                const [Product_ID, SKU, Name,Product_URL,Price] = Product.children; //Product 태그안의 자식태그들
-                //console.log(Product_ID.textContent,SKU.textContent,Name.textContent);
-                //  const [Product_ID, SKU, Name,Product_URL,Price] = Product.children; //Product 태그안의 자식태그들
-               //  console.log(subject.textContent,title.textContent,author.textContent);
-               //  tbody.innerHTML+=`
-               // <tr>
-               //      <td>${subject.textContent}</td>
-               //      <td>${title.textContent}</td>
-               //      <td>${author.textContent}</td>
-               // </tr>
-               // `;
+            products.forEach((product) => {
+                console.log(product);
+                //const childTags = Product.children;
+                let tr = "<tr>";
+                [...product.children].forEach((attr)=>{
+                    console.log(attr);
+                    tr += `<td>${attr.textContent}</td>`;
+                });
+                tr+="</tr>";
+                tbody.innerHTML+=tr;
             });
         }
     })

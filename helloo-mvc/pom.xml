@@ -97,6 +97,22 @@
       <version>1.5</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson
+           json 데이터 핸들링 의존성 추가
+      -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-websocket -->
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-websocket</artifactId>
+      <version>9.0.83</version>
+    </dependency>
+
 
 
   </dependencies>

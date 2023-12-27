@@ -44,9 +44,6 @@ public class TextStudentSearchServlet extends HttpServlet
             }
         }
 
-
-
-
         //4.
 
     }

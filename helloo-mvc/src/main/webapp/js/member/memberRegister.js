@@ -1,4 +1,52 @@
 console.log("memberRegister.js........");
+//1227 아이디 중복검사
+document.querySelector("#id").addEventListener('keyup',(e)=> {
+    const value = e.target.value;
+    console.log(value);
+
+    //아이디 사용,불가능을 알려주는 span태그들
+    const guideOk = document.querySelector(".guide.ok");
+    const guideError = document.querySelector(".guide.error");
+    const idValid = document.querySelector("#idValid");
+    if(/^\w{4,}/.test(value))
+    {
+       $.ajax({
+          url : `${contextPath}/member/checkIdDuplicate`,
+          data : {
+            id : value
+          },
+           success(response){
+              console.log(response);
+              const {result} = response;
+              if(result)
+              {
+                  //아이디 사용가능
+                  guideError.classList.add('hidden');
+                  guideOk.classList.remove('hidden');
+                  idValid.value=1;
+              }
+              else
+              {
+                  //아이디 사용불가능
+                  guideOk.classList.add('hidden');
+                  guideError.classList.remove('hidden');
+                  idValid.value=0;
+              }
+           }
+       });
+    }
+    else
+    {
+        //지우고 다시쓰기하는 경우
+        guideOk.classList.add('hidden');
+        guideError.classList.add('hidden');
+        idValid.value=0;
+    }
+
+});
+
+
+
 const hobbyEtc = document.querySelector("#hobby-etc");
 hobbyEtc.addEventListener('keyup',(e)=>{
     
@@ -54,7 +102,8 @@ document.memberRegisterFrm.addEventListener("submit",(e)=>{
     const password = frm.password;
     const name = frm.name;
     const email = frm.email;
-    
+    const idValid = frm.idValid;
+    console.log(idValid);
     //addEventListener = return false x e.preventDefault() 처리
 
     //아이디:영문자 숫자 4글자 이상
@@ -63,7 +112,17 @@ document.memberRegisterFrm.addEventListener("submit",(e)=>{
         alert('아이디는 영 대/소문자 4글자 이상 작성해주세요..')
         e.preventDefault();
     }
-    
+
+    //아이디 중복검사 통과 여부
+    if(idValid.value!== "1"){
+        alert('사용가능한 아이디를 입력해주세요..');
+        e.preventDefault();
+        return;
+    }
+
+
+
+
     //비밀번호:영문자 숫자 특수문자 4글자 이상
     const reg_password = [
 

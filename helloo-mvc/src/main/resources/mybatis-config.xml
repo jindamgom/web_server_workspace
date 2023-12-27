@@ -57,8 +57,11 @@
         </environment>
     </environments>
     <!--    sql을 읽어줌  1215 :  board mapper 추가 -->
+    <!--    sql을 읽어줌  1227 :  photo mapper , notification mapper 추가 -->
     <mappers>
         <mapper resource="mapper/member/member-mapper.xml"/>
         <mapper resource="mapper/board/board-mapper.xml"/>
+        <mapper resource="mapper/photo/photo-mapper.xml"/>
+        <mapper resource="mapper/notification/notification-mapper.xml"/>
     </mappers>
 </configuration>

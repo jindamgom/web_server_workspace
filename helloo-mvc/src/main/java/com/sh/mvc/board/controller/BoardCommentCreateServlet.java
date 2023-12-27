@@ -4,6 +4,8 @@ import com.sh.mvc.board.model.entity.Board;
 import com.sh.mvc.board.model.entity.BoardComment;
 import com.sh.mvc.board.model.service.BoardService;
 import com.sh.mvc.board.model.vo.BoardVo;
+import com.sh.mvc.notification.model.entity.Notification;
+import com.sh.mvc.notification.model.service.NotificationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import java.io.IOException;
 public class BoardCommentCreateServlet extends HttpServlet
 {
     private BoardService boardService = new BoardService();
+    private NotificationService notificationService = new NotificationService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -40,6 +43,9 @@ public class BoardCommentCreateServlet extends HttpServlet
         //2.업무로직
         int result = boardService.insertBoardComment(comment);
         req.getSession().setAttribute("msg","댓글이 등록었습니다.");
+
+        //1227 실시간 알림처리
+        result = notificationService.notify(comment);
 
         //3.redirect
         resp.sendRedirect(req.getContextPath()+"/board/BoardDetail?id="+boardId);

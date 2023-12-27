@@ -5,15 +5,20 @@
     <title>Ajax | xml</title>
     <style>
         table{
-            background: aquamarine;
+
             border: 1px solid #000;
             border-collapse: collapse;
             margin :10px 0;
         }
-        th,td{
+        th{
+            background: aquamarine;
             border:  1px solid #000;
             border-collapse: collapse;
         }
+        td{
+             border:  1px solid #000;
+             border-collapse: collapse;
+         }
 
     </style>
 </head>
