@@ -39,7 +39,7 @@ public class BoardDetailServlet extends HttpServlet {
         //1.사용자 입력값 처리
         try {
             long id = Long.parseLong(req.getParameter("id"));
-            System.out.println(id);
+            System.out.println("현재 게시글 번호:"+id);
 
             //2.업무로직
             //조회수 관련 처리
