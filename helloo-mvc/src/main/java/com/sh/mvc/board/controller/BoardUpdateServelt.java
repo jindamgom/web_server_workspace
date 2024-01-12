@@ -103,14 +103,13 @@ public class BoardUpdateServelt extends HttpServlet
 
 
 
-
-
         //2.업무 로직
         int result = boardService.updateBoard(board);
         req.getSession().setAttribute("msg","게시글을 성공적으로 수정하였습니다");
 
+
         //3.게시판 목록페이지로 redirect
-        resp.sendRedirect(req.getContextPath()+"/board/BoardDetail?id="+board.getId());
+        //resp.sendRedirect(req.getContextPath()+"/board/BoardDetail?id="+board.getId());
 
 
 

@@ -438,3 +438,35 @@ select * from notification;
 
 --조회:특정회원의 확인이 되지 않은 알람 조회
 select * from notification where member_id = 'rhgPwls' and checked=0;
+
+
+--------------------------------------------------------------------
+--0110 ncsTest용 member table
+
+CREATE TABLE MEMBER2(
+
+MEMBER_ID VARCHAR2(30) PRIMARY KEY,
+
+MEMBER_PWD VARCHAR2(100) NOT NULL,
+
+MEMBER_NM VARCHAR2(15) NOT NULL,
+
+MEMBER_ENROLL_DT DATE DEFAULT SYSDATE
+
+);
+
+INSERT INTO MEMBER2 VALUES('user01', 'pass01', '홍길동', DEFAULT);
+
+select* from member2;
+
+ select
+            *
+        from
+            member2
+        where
+        MEMBER_ID = 'user01';
+
+
+
+----
+select * from board_comment;

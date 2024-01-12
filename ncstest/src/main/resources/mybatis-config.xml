@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="datasource-local.properties"/>
+
+    <settings>
+        <!--   NULL 데이터가 전달된 경우 NULL값으로 처리     -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <!--   member_name컬럼은 memberName 필드와 매핑    -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--mapper-result에 사용할 별칭 -->
+    <typeAliases>
+        <typeAlias type="com.ncs.test.member.model.vo.Member" alias="Member"/>
+        <package name="com.ncs.test"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mappers/member/member-mapper.xml"/>
+    </mappers>
+</configuration>

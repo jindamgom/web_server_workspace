@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+    <select id="loginMember" resultMap ="memberVo">
+<!--기존에 member 테이블이 있어서 member2라고 새로 create-->
+        select
+            *
+        from
+            member2
+        where
+        MEMBER_ID = #{memberId}
+    </select>
+    <resultMap id="memberVo" type="member">
+        <id column = "MEMBER_ID" property="memberId"/>
+        <result column="MEMBER_PWD" property="memberPwd"/>
+        <result column="MEMBER_NM" property="memberName"/>
+        <result column="MEMBER_ENROLL_DT" property="memberEnrollDate"/>
+    </resultMap>
+</mapper>

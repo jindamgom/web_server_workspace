@@ -31,6 +31,7 @@ public class memberUpdateServlet extends HttpServlet
         String id1 = loginMember.getId(); //이런식으로도 ..가져올 수 있다!
 
         String id = req.getParameter("id"); //수정,읽기용으로 한번 가져옴 update....where=id;
+        System.out.println("memberUpdateServlet do post id"+id);
         String _name = req.getParameter("name"); //이름
         String _birthday = req.getParameter("birthday"); //생년월일
         String _gender = req.getParameter("gender");

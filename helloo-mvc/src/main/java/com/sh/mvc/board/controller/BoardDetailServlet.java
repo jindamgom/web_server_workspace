@@ -57,6 +57,9 @@ public class BoardDetailServlet extends HttpServlet {
             board.setContent(HelloMvcUtils.convertLineFeedToBr(safeHtml));
             req.setAttribute("board", board);
 
+            System.out.println("===============이 아래로 해당 게시글의 달린 댓글 내용들===============");
+            System.out.println(board.getComments());
+
 
             //응답 쿠키 생성. 즉, 처음 읽은 글이라면 생성하자.
             if (!hasRead) {
@@ -82,7 +85,6 @@ public class BoardDetailServlet extends HttpServlet {
         //예외 전환해서 던지기 : 사용자 친화적 메시지, 원인예외 wrapping
         //catch 하단에 최상위 예외 Exception e로 변경 후
         //throw new BoardException("게시글 상세보기 오류",e);
-
 
     }
 

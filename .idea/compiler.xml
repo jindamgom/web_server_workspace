@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/test0110/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ncstest" />
         <module name="hello-web" />
         <module name="helloo-mvc" />
         <module name="menu" />
@@ -15,6 +19,7 @@
     <bytecodeTargetLevel>
       <module name="hello-mvc" target="17" />
       <module name="mybatis" target="17" />
+      <module name="test0110" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

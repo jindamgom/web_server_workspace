@@ -19,13 +19,14 @@ public class CheckIdDuplicateServlet extends HttpServlet
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("아이디중복체크하기이이이이이이서블릿");
+        System.out.println("CheckIdDuplicateServlet 아이디 중복 체크 서블릿");
         //1.사용자 입력값 처리
         String id = req.getParameter("id");
         System.out.println(id);
 
         //2.업무로직
         Member member = memberService.findById(id);
+        System.out.println("아이디중복 확인 findby id:"+member);
         boolean result = member==null;
 
         //3.응답 json 작성..

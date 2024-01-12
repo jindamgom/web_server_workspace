@@ -12,7 +12,6 @@
 
         -->
     <select id="findById" resultMap="BoardVoMap">
-
         select
             b.*,
             m.name member_name,

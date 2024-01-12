@@ -54,7 +54,7 @@ public class BoardListServlet extends HttpServlet
 {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        System.out.println("BoardListServlet do get");
         //1.사용자 입력값 가져오기
         //기본적으로 page에 1값을 주는 이유 페이지단 처리[아래에]하다가 null이 발생할 수 있으므로.
         int page = 1;
@@ -63,6 +63,7 @@ public class BoardListServlet extends HttpServlet
         {
             //값이 있으면 정수 변환, 값이 없으면 (null)이라 포맷에러 발생
             page  = Integer.parseInt(req.getParameter("page"));
+            System.out.println("11111111111111111111페이징:"+page);
         }
         catch(NumberFormatException ignore) {}
         //에러발생 시 별 다른 조치 취하지 않고 기본값 1 사용

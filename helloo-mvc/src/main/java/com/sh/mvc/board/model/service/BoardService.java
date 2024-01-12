@@ -65,7 +65,6 @@ public class BoardService {
             if(!hasRead)
                 result = boardDao.updateBoardReadCount(session,id);
 
-
             board = boardDao.findById(session, id);
             List<BoardComment> comments = boardDao.findCommentByBoardId(session,id);
             board.setComments(comments);//보드에 보드커맨츠 추가

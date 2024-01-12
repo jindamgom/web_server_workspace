@@ -23,14 +23,12 @@ public class jsAjaxServlet extends HttpServlet
         System.out.println("num = "+num);
 
         //2.업무 로직
-
         //3.view단 처리
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter out = resp.getWriter();
         out.println("이름은 "+name+"입니다.");
         out.println("숫자는 "+num+"입니다.");
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

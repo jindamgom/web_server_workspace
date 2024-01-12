@@ -67,7 +67,6 @@
         <th>type</th>
         <td class="celeb-type"></td>
     </tr>
-
 </table>
 
 

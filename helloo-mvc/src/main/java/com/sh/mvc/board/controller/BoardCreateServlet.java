@@ -73,7 +73,7 @@ public class BoardCreateServlet extends HttpServlet
                     //일반 텍스트 : board 객체에 설정
 
                     String value = item.getString("utf-8");
-                    System.out.println(name+"/"+value);
+                    System.out.println("board - ServletFileUpload:  "+name+"/"+value);
                     //Board객체에 설정자 로직 구현..
                     board.setValue(name,value);
 
@@ -121,7 +121,7 @@ public class BoardCreateServlet extends HttpServlet
 
         //2.업무로직
         int result = boardService.insertBoard(board);
-        req.getSession().setAttribute("msg","게시글을 성공적으로 등록하였습니다");
+        req.getSession().setAttribute("msg","게시글을 성공적으로 등록하였습니다ㅎㅎㅎㅎ");
 
         //3.게시판 목록페이지로 redirect
         resp.sendRedirect(req.getContextPath()+"/board/boardList");

@@ -19,7 +19,7 @@
 
   <dependencies>
 
-    <!-- 1207 추가 -->
+
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-core</artifactId>

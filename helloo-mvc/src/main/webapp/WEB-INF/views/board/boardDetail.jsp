@@ -18,6 +18,7 @@
         <p class="mb-3 font-normal text-gray-700">${board.content}</p>
 
         <c:forEach items="${board.attachments}" var="attach">
+            <p>${pageContext.request.contextPath}/upload/board/${attach.renamedFilename}</p>
             <a href="${pageContext.request.contextPath}/upload/board/${attach.renamedFilename}"
                download="${attach.originalFilename}" class="flex items-center text-blue-600 hover:underline">
                 <img src="../images/file.png" class="w-[16px] mr-1">

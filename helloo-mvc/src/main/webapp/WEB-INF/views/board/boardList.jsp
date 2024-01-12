@@ -70,6 +70,7 @@
                     </td>
 
                     <td class="px-6 py-4">${board.readCount}</td>
+
                 </tr>
             </c:forEach>
             </tbody>

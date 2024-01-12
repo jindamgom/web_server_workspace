@@ -15,12 +15,15 @@
         <option value="$PROJECT_DIR$/hello-mvc/pom.xml" />
         <option value="$PROJECT_DIR$/helloo-mvc/pom.xml" />
         <option value="$PROJECT_DIR$/ajax/pom.xml" />
+        <option value="$PROJECT_DIR$/test0110/pom.xml" />
+        <option value="$PROJECT_DIR$/ncstest/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/hello-mvc/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/test0110/pom.xml" />
       </set>
     </option>
   </component>

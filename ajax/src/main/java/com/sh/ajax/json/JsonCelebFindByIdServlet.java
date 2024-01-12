@@ -17,7 +17,6 @@ public class JsonCelebFindByIdServlet extends HttpServlet
 {
     private CelebService celebService = new CelebService();
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //1.사용자 입력 값 처리
