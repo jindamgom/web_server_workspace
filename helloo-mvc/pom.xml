@@ -129,10 +129,15 @@
       <version>19.21.0.0</version>
     </dependency>
 
-
-
   </dependencies>
   <build>
     <finalName>helloo-mvc</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
+      </plugin>
+    </plugins>
   </build>
 </project>

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="datasource-staging.properties"/>
+    <properties resource="configs/datasource-staging.properties"/>
 
     <settings>
         <!--   NULL 데이터가 전달된 경우 NULL값으로 처리     -->
